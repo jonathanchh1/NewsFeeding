@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.emi.newsfeeding.Connectivity.Companion.isConnected
 import com.emi.newsfeeding.databinding.ActivityFeedsBinding
 import com.emi.newsfeeding.di.injector
 import com.google.android.material.snackbar.Snackbar
@@ -43,7 +44,9 @@ class NewsFeedActivity : AppCompatActivity() {
     private fun onLoadingError(){
         snackbar = Snackbar.make(rootView(), getString(R.string.errorloading), Snackbar.LENGTH_INDEFINITE)
                 snackbar.setAction(R.string.error, {
+                    if(!isConnected(applicationContext)){
 
+                    }
                 })
         snackbar.show()
 

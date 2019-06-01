@@ -12,4 +12,6 @@
     <string name="date_label">Published :</string>
     <string name="grid">show as Grid</string>
     <string name="list">list view</string>
+    <string name="errorloading">There\'s no network connection currently.</string>
+    <string name="error">loading data from database</string>
 </resources>
