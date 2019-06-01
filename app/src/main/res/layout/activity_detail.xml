@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context="com.emi.newsfeeding.DetailActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_bar_height"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:expandedTitleMarginStart="68dp"
+                app:expandedTitleMarginEnd="64dp"
+                app:collapsedTitleGravity="center"
+                app:toolbarId="@+id/toolbar_layout">
+
+            <ImageView
+                    android:id="@+id/background_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="centerCrop" />
+
+            <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/detail_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@drawable/shadow"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout android:id="@+id/description_placeholder"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/app_bar">
+
+        <TextView android:id="@+id/author_label"
+                  android:layout_width="70dp"
+                  android:layout_height="70dp"
+                  android:text="@string/writer"
+                  android:paddingTop="10dp"
+                  android:paddingRight="15dp"
+                  android:textAlignment="center"
+                  android:layout_alignParentLeft="true"
+                  android:textStyle="bold"
+                  android:layout_marginLeft="5dp"/>
+
+        <TextView android:id="@+id/author"
+                  android:layout_width="wrap_content"
+                  android:layout_height="70dp"
+                  android:paddingTop="10dp"
+                  android:textStyle="italic"
+                  android:paddingRight="15dp"
+                  android:paddingLeft="20dp"
+                  android:layout_marginLeft="5dp"
+                  android:layout_toRightOf="@+id/author_label"
+                  android:layout_toEndOf="@+id/author_label"
+                  android:layout_centerVertical="true"
+                  tools:text="@string/name"
+                 android:textAlignment="center"/>
+
+
+        <TextView android:id="@+id/date_label"
+                  android:layout_width="wrap_content"
+                  android:layout_height="70dp"
+                  android:text="@string/writer"
+                  android:layout_toRightOf="@+id/author"
+                  android:paddingTop="10dp"
+                  android:paddingLeft="25dp"
+                  android:textAlignment="center"
+                  tools:text="@string/date_label"
+                  android:layout_toEndOf="@+id/author"
+                  android:textStyle="bold"
+                  android:layout_marginLeft="10dp"/>
+
+        <TextView android:id="@+id/date"
+                  android:layout_width="wrap_content"
+                  android:layout_height="70dp"
+                  android:textAlignment="center"
+                  android:layout_toRightOf="@+id/date_label"
+                  android:layout_alignParentRight="true"
+                  tools:text="@string/date"
+                  android:paddingTop="10dp"
+                  android:paddingRight="10dp"
+                  android:layout_marginLeft="5dp"
+                  />
+
+    </RelativeLayout>
+    <LinearLayout android:id="@+id/article_layout"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical"
+                  android:layout_below="@id/description_placeholder">
+
+        <WebView android:id="@+id/webview"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent">
+        </WebView>
+    </LinearLayout>
+
+
+</RelativeLayout>

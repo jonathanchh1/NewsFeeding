@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="white">#FAFAFA</color>
+    <color name="colorgrey">#B4B3B3</color>
+    <color name="share_matte">#4065cc</color>
+    <color name="favorite_matte">#f12222</color>
+    <color name="detail_accent_pane_background">#455A64</color>
+    <color name="detail_accent_label">#90A4AE</color>
+    <color name="medium_grey">#1b686464</color>
+    <color name="shadow">#00000000</color>
+    <color name="shadowfade">#10000000</color>
+
+</resources>
