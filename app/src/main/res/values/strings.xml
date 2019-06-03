@@ -14,4 +14,10 @@
     <string name="list">list view</string>
     <string name="errorloading">There\'s no network connection currently.</string>
     <string name="error">loading data from database</string>
+    <string name="database_name">News Database</string>
+    <string name="succesful">result</string>
+    <string name="viewTrans">tView</string>
+    <string name="placeHolder">tplaceHolder</string>
+    <string name="toolbarTrans">tActionBar</string>
+    <string name="experimental">title_placeHolder</string>
 </resources>

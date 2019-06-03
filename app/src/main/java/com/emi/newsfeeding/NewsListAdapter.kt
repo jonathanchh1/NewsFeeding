@@ -4,8 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.emi.newsfeeding.databinding.NewsItemsBinding
+import javax.inject.Inject
 
-class NewsListAdapter constructor(private var newsList : List<NewsFeed>) : RecyclerView.Adapter<NewsListAdapter.NewsFeedBindingView>() {
+class NewsListAdapter @Inject constructor(private var newsList : List<NewsFeed>) : RecyclerView.Adapter<NewsListAdapter.NewsFeedBindingView>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsFeedBindingView {
@@ -30,10 +32,15 @@ class NewsListAdapter constructor(private var newsList : List<NewsFeed>) : Recyc
     internal fun updateAdapter(newsfeed : List<NewsFeed>){
         this.newsList = newsfeed
     }
-    inner class NewsFeedBindingView(val binding : NewsItemsBinding) : RecyclerView.ViewHolder(binding.root){
+
+    inner class NewsFeedBindingView(var binding : NewsItemsBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(news : NewsFeed){
-
+            if(binding.newsModel == null){
+                binding.newsModel = PresentViewModel(news)
+            }else{
+                binding.newsModel!!.news = news
+            }
         }
     }
 }

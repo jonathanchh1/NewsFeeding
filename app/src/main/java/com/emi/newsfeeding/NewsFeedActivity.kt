@@ -1,20 +1,26 @@
 package com.emi.newsfeeding
 
+import android.annotation.TargetApi
+import android.os.Build
 import android.os.Bundle
+import android.transition.Transition
+import android.transition.TransitionListenerAdapter
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.emi.newsfeeding.Connectivity.Companion.isConnected
 import com.emi.newsfeeding.databinding.ActivityFeedsBinding
 import com.emi.newsfeeding.di.injector
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.news_items.*
+import javax.inject.Inject
 
-class NewsFeedActivity : AppCompatActivity() {
-
+class NewsFeedActivity @Inject constructor(var news : NewsFeed) : AppCompatActivity() {
     private lateinit var snackbar : Snackbar
     private lateinit var staggeredGridLayoutManager: StaggeredGridLayoutManager
     private lateinit var adapter : NewsListAdapter
@@ -29,7 +35,7 @@ class NewsFeedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feeds)
         val binding : ActivityFeedsBinding = DataBindingUtil.setContentView(this, R.layout.activity_feeds)
-         binding.viewModel = viewModel
+         binding.newsModels = viewModel
          binding.lifecycleOwner = this
          staggeredGridLayoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
          binding.rcNews.layoutManager = staggeredGridLayoutManager
@@ -37,19 +43,52 @@ class NewsFeedActivity : AppCompatActivity() {
          binding.rcNews.adapter = adapter
          isListView = true
 
+        viewModel.loadingApiNews.observe(this, Observer {
+            if(it == null || it.isEmpty()){
+                onLoadingError()
+            }else{
+                adapter.updateAdapter(it)
+                adapter.notifyDataSetChanged()
+            }
+        })
+
+        viewModel.storeLikes.observe(this, Observer {
+            likes ->
+            likes?.let {
+                news.likes = it
+            }
+        })
+        windowTransition()
     }
 
 
 
     private fun onLoadingError(){
         snackbar = Snackbar.make(rootView(), getString(R.string.errorloading), Snackbar.LENGTH_INDEFINITE)
-                snackbar.setAction(R.string.error, {
+                snackbar.setAction(R.string.error, ({
                     if(!isConnected(applicationContext)){
-
+                        viewModel.loadingDatabaseNews.observe(this, Observer {
+                            DatabaseData ->
+                            DatabaseData?.let {
+                                adapter.updateAdapter(it)
+                                adapter.notifyDataSetChanged()
+                            }
+                        })
                     }
-                })
-        snackbar.show()
+                })).show()
+    }
 
+
+    fun windowTransition(){
+        window.enterTransition.addListener(@TargetApi(Build.VERSION_CODES.O)
+        object : TransitionListenerAdapter() {
+            override fun onTransitionEnd(transition: Transition?) {
+                super.onTransitionEnd(transition)
+                 title_placeholder.visibility = View.VISIBLE
+                 title_placeholder.animate().alpha(0.20f)
+                 finishAfterTransition()
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
