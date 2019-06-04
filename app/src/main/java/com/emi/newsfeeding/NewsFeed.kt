@@ -26,7 +26,7 @@ import javax.inject.Singleton
                                  @ColumnInfo(name = "url") var url : String?=null,
                                  @Expose
                                  @SerializedName("urlToImage")
-                                 @ColumnInfo(name = "urlToImage") var thumbnail : String?=null,
+                                 @ColumnInfo(name = "urlToImage") var thumbnail : String ?=null,
                                  @Expose
                                  @SerializedName("publishedAt")
                                  @ColumnInfo(name = "published") var published : String?=null,

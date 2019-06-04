@@ -1,59 +1,68 @@
 package com.emi.newsfeeding
 
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.palette.graphics.Palette
 import com.emi.newsfeeding.databinding.ActivityDetailBinding
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
-import kotlinx.android.synthetic.main.news_items.*
+import kotlinx.android.synthetic.main.detail_toolbar.*
+
 
 class DetailActivity : AppCompatActivity() {
 
-    private lateinit var appLayout : CollapsingToolbarLayout
     private lateinit var factory : DetailViewModelFactory
     private lateinit var detailViewModels : DetailViewModel
-    private lateinit var news : NewsFeed
+    lateinit var news : NewsFeed
     private var DefaultColor : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding : ActivityDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_detail)
          news = intent.getParcelableExtra("news") as NewsFeed
-         factory = DetailViewModelFactory(news)
+         factory = DetailViewModelFactory(news, this)
          detailViewModels = ViewModelProviders.of(this, factory).get(DetailViewModel::class.java)
          binding.detailViewModel = detailViewModels
          binding.lifecycleOwner = this
-         appLayout = findViewById(R.id.toolbar_layout)
          DefaultColor = ContextCompat.getColor(this, R.color.colorPrimary)
-         setUpbar()
+
+        pictureColor()
+        setUpbar()
     }
 
     private fun setUpbar(){
-        appLayout?.elevation= 7.0f
-        setSupportActionBar(detail_toolbar)
+        setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
 
-
-    private fun getThumbnailPalette(){
-        val bitmap = BitmapFactory.decodeResource(resources, Integer.valueOf(news?.thumbnail))
-        val palette : Palette = Palette.from(bitmap).generate()
-        applyPalette(palette)
+    private fun pictureColor(){
+      BindingMethod.bitmap.observe(this, Observer {
+          if(it != null){
+              val pic = Palette.from(it).generate()
+              applyPalette(pic)
+          }
+      })
     }
 
-   private fun applyPalette(palette : Palette){
-       window.setBackgroundDrawable(ColorDrawable(palette.getDarkMutedColor(DefaultColor)))
-       thumbnail_placeholder.setBackgroundColor(palette.getMutedColor(DefaultColor))
 
-
+    private fun applyPalette(palette : Palette){
+        window.setBackgroundDrawable(ColorDrawable(palette.getDarkMutedColor(DefaultColor)))
+        title_placeholder.setBackgroundColor(palette.getLightVibrantColor(DefaultColor))
+        article_layout.setBackgroundColor(palette.getMutedColor(DefaultColor))
+        description_placeholder.setBackgroundColor(palette.getLightMutedColor(DefaultColor))
     }
+
 
 
 }

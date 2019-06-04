@@ -21,7 +21,7 @@ newsPathFinder: NewsPathFinder) : Disposable {
     private var disposable = Disposables.empty()
     private val compositeDisposable = CompositeDisposable()
     private var mutableNewsApi = MutableLiveData<List<NewsFeed>>()
-    lateinit var isLoading : ObservableField<Boolean>
+    var isLoading = ObservableField<Boolean>()
     var loadingFromDatabase : LiveData<List<NewsFeed>> = newsFeedDao.getDatabaseNews()
 
     private val loadingFromApi : LiveData<List<NewsFeed>>

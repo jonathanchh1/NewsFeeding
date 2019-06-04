@@ -1,6 +1,7 @@
 package com.emi.newsfeeding
 
 import android.app.Application
+import android.view.View
 import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -11,10 +12,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class NewsViewModel @Inject constructor(newsPathFinder: NewsPathFinder, var news: NewsFeed): AndroidViewModel(Application()){
+ class NewsViewModel @Inject constructor(newsPathFinder: NewsPathFinder) : AndroidViewModel(Application()){
 
      private var newsRepo : NewsRepo
-     private var isLoading : ObservableField<Boolean>
+     var isLoading : ObservableField<Boolean>
      var loadingApiNews : LiveData<List<NewsFeed>>
      var loadingDatabaseNews : LiveData<List<NewsFeed>>
      private var mutableLike = MutableLiveData<Int>(R.integer.like)
@@ -31,10 +32,7 @@ class NewsViewModel @Inject constructor(newsPathFinder: NewsPathFinder, var news
             }
 
     fun onLike(){
-        if(news.likes == null){
-            mutableLike.value = (mutableLike.value ?: 0) + 1
-        }
-
+        mutableLike.value = (mutableLike.value ?: 0) + 1
     }
 
 

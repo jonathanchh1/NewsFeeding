@@ -3,6 +3,7 @@ package com.emi.newsfeeding.di
 import com.emi.newsfeeding.NetworkServices
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -12,6 +13,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+@Module
 object NetworkModule{
 
     @Singleton @Provides
@@ -32,7 +34,7 @@ object NetworkModule{
 
     @Singleton @Provides
     @JvmStatic fun NetworkProvider() : Retrofit = Retrofit.Builder()
-        .baseUrl("www.placeholder.com")
+        .baseUrl("https://newsapi.org/v2/")
         .addConverterFactory(GsonConverterFactory.create(gsonConverter()))
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .client(httpClient())

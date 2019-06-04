@@ -2,10 +2,17 @@ package com.emi.newsfeeding
 
 import android.app.Application
 import android.content.Context
+import com.emi.newsfeeding.di.AppComponent
+import com.emi.newsfeeding.di.ComponentProvider
+import com.emi.newsfeeding.di.DaggerAppComponent
 import timber.log.Timber
 
-class NewsApp : Application() {
-
+class NewsApp : Application(), ComponentProvider {
+    override val appComponent: AppComponent by lazy{
+        DaggerAppComponent.builder()
+            .applicationContext(this)
+            .build()
+    }
 
     override fun onCreate() {
         super.onCreate()

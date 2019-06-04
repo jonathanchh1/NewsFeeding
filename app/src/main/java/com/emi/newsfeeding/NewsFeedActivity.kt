@@ -18,14 +18,17 @@ import com.emi.newsfeeding.databinding.ActivityFeedsBinding
 import com.emi.newsfeeding.di.injector
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.news_items.*
+import kotlinx.android.synthetic.main.toolbar.*
 import javax.inject.Inject
 
-class NewsFeedActivity @Inject constructor(var news : NewsFeed) : AppCompatActivity() {
+class NewsFeedActivity : AppCompatActivity() {
+
     private lateinit var snackbar : Snackbar
     private lateinit var staggeredGridLayoutManager: StaggeredGridLayoutManager
     private lateinit var adapter : NewsListAdapter
     private lateinit var menu : Menu
     private var isListView : Boolean = false
+    private var news = NewsFeed()
 
     private val viewModel by lazy {
         ViewModelProviders.of(this, injector.NewsViewModelFactory()).get(NewsViewModel::class.java)
@@ -58,9 +61,16 @@ class NewsFeedActivity @Inject constructor(var news : NewsFeed) : AppCompatActiv
                 news.likes = it
             }
         })
+        setUpbar()
         windowTransition()
     }
 
+
+    fun setUpbar(){
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        supportActionBar?.setDisplayShowTitleEnabled(true)
+    }
 
 
     private fun onLoadingError(){
@@ -79,7 +89,7 @@ class NewsFeedActivity @Inject constructor(var news : NewsFeed) : AppCompatActiv
     }
 
 
-    fun windowTransition(){
+   private fun windowTransition(){
         window.enterTransition.addListener(@TargetApi(Build.VERSION_CODES.O)
         object : TransitionListenerAdapter() {
             override fun onTransitionEnd(transition: Transition?) {

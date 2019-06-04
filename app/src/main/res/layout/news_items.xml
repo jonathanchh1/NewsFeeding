@@ -6,6 +6,7 @@
         <import type="android.view.View"/>
         <variable name="newsModel" type="com.emi.newsfeeding.PresentViewModel"/>
         <variable name="newsLike" type="com.emi.newsfeeding.NewsViewModel"/>
+        <variable name="news" type="com.emi.newsfeeding.NewsFeed"/>
     </data>
 
 
@@ -24,11 +25,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-
-        <RelativeLayout android:id="@+id/thumbnail_placeholder"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                       android:transitionName="@string/placeHolder">
 
         <ImageView android:id="@+id/thumbnail"
                    android:layout_width="match_parent"
@@ -51,18 +47,17 @@
                   android:text="@{newsModel.title}"
                   android:layout_margin="@dimen/margins"
                   android:textStyle="bold"
-                  android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                  android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                   android:textColor="@color/white"
                   android:transitionName="@string/viewTrans"
                   tools:text="@string/title"
                   android:gravity="center"/>
         </RelativeLayout>
 
-        </RelativeLayout>
         <TextView android:id="@+id/desc"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:layout_below="@+id/thumbnail_placeholder"
+                  android:layout_below="@+id/title_placeholder"
                   android:ellipsize="end"
                   android:singleLine="true"
                   android:text="@{newsModel.desc}"
@@ -75,11 +70,6 @@
                   android:layout_marginRight="@dimen/activity_vertical_margin"
                   android:layout_marginLeft="@dimen/activity_vertical_margin"/>
 
-        <RelativeLayout android:id="@+id/sharing_placeholder"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/desc">
-
         <Button android:id="@+id/like_button"
                 style="?android:attr/borderlessButtonStyle"
                 android:text="@string/like"
@@ -88,6 +78,7 @@
                 android:background="@color/favorite_matte"
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
+                android:layout_below="@+id/desc"
                 android:layout_height="wrap_content"/>
 
         <TextView android:id="@+id/like_text"
@@ -95,6 +86,7 @@
                   android:layout_height="wrap_content"
                   android:text="@{Integer.toString(newsModel.likes())}"
                   android:textSize="@dimen/text_size"
+                  android:layout_below="@+id/desc"
                   tools:text="@string/number"
                   android:layout_marginLeft="@dimen/activity_vertical_margin"
                   android:layout_toLeftOf="@+id/favorite_button"
@@ -105,6 +97,7 @@
                      style="?android:attr/borderlessButtonStyle"
                      android:layout_width="@dimen/sizes_share"
                      android:layout_height="@dimen/sizes_share"
+                     android:layout_below="@+id/desc"
                      android:layout_alignParentRight="true"
                      android:layout_alignParentEnd="true"
                      android:layout_marginRight="@dimen/activity_vertical_margin"
@@ -118,12 +111,11 @@
                 android:layout_width="@dimen/sizes_share"
                 android:layout_height="@dimen/sizes_share"
                 android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:layout_below="@+id/desc"
                 android:layout_toLeftOf="@id/share_button"
                 android:src="@drawable/ic_favorite_border_black_24dp"
                 android:tint="@color/favorite_matte"/>
         </RelativeLayout>
 
-
-    </RelativeLayout>
 </androidx.cardview.widget.CardView>
 </layout>

@@ -12,4 +12,4 @@ data class NewsResponse(@Expose
                          @Expose
                          @SerializedName("articles") var result : List<NewsFeed>?=null,
                          @Expose
-                         @SerializedName("articles") var sources : List<Source>?=null)
+                         @SerializedName("source") var sources : List<Source>?=null)

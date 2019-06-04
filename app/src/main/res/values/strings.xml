@@ -20,4 +20,5 @@
     <string name="placeHolder">tplaceHolder</string>
     <string name="toolbarTrans">tActionBar</string>
     <string name="experimental">title_placeHolder</string>
+    <string name="unkown">author unknown</string>
 </resources>
