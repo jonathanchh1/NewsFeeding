@@ -5,12 +5,27 @@
     <color name="colorAccent">#D81B60</color>
     <color name="white">#FAFAFA</color>
     <color name="colorgrey">#B4B3B3</color>
+    <color name="dark_gray">#DF252525</color>
     <color name="share_matte">#4065cc</color>
     <color name="favorite_matte">#f12222</color>
-    <color name="detail_accent_pane_background">#455A64</color>
+    <color name="detail_accent_pane_background">#AFB1B4</color>
     <color name="detail_accent_label">#90A4AE</color>
     <color name="medium_grey">#1b686464</color>
     <color name="shadow">#00000000</color>
     <color name="shadowfade">#10000000</color>
+
+
+    <color name="btn_default_light_normal">#00000000</color>
+    <color name="btn_default_light_pressed">#40ffffff</color>
+    <color name="btn_send_normal">#02c754</color>
+    <color name="btn_send_pressed">#006633</color>
+    <color name="btn_default_shadow">#99000000</color>
+    <color name="btn_context_menu_normal">#ffffff</color>
+    <color name="btn_context_menu_pressed">#40000000</color>
+    <color name="btn_context_menu_text_red">#ffff0000</color>
+
+    <color name="text_like_counter">#2b5a83</color>
+
+    <color name="bg_comments">#ffffff</color>
 
 </resources>

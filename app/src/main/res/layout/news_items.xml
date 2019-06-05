@@ -6,27 +6,64 @@
         <import type="android.view.View"/>
         <variable name="newsModel" type="com.emi.newsfeeding.PresentViewModel"/>
         <variable name="newsLike" type="com.emi.newsfeeding.NewsViewModel"/>
-        <variable name="news" type="com.emi.newsfeeding.NewsFeed"/>
     </data>
 
 
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="true"
+        bind:cardElevation="2dp"
         android:onClick="@{newsModel::onClick}"
-        android:layout_gravity="center"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_vertical_margin"
        android:foreground="?attr/selectableItemBackground">
 
-    <RelativeLayout android:id="@+id/relative"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
 
-        <ImageView android:id="@+id/thumbnail"
+
+        <RelativeLayout android:id="@+id/image_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|right"
+                    android:shadowColor="@color/colorgrey"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true">
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tint="@color/favorite_matte"
+                        android:src="@drawable/ic_favorite_black_24dp"/>
+
+                <TextSwitcher
+                        android:id="@+id/tsLikesCounter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:inAnimation="@anim/slide_in_likes_counter"
+                        android:outAnimation="@anim/slide_out_like_counter">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{Integer.toString(newsModel.likes())}"
+                            tools:text="@string/likes_count_"
+                            android:textColor="@color/text_like_counter"/>
+
+                </TextSwitcher>
+            </LinearLayout>
+
+
+            <ImageView android:id="@+id/thumbnail"
                    android:layout_width="match_parent"
                    android:layout_height="@dimen/imageHeight"
                    android:scaleType="centerCrop"
@@ -34,70 +71,80 @@
                    android:transitionName="@string/viewTrans"
                    bind:srcCompat="@{newsModel.thumbnail}"/>
 
+
+
         <RelativeLayout android:id="@+id/title_placeholder"
                         android:layout_alignBottom="@+id/thumbnail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorPrimary"
+                        android:background="@drawable/shadow"
                         android:transitionName="@string/experimental">
 
         <TextView android:id="@+id/title"
                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
+                  android:layout_height="@dimen/title"
                   android:text="@{newsModel.title}"
                   android:layout_margin="@dimen/margins"
                   android:textStyle="bold"
                   android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                  android:textColor="@color/white"
+                  android:textColor="@color/detail_accent_label"
                   android:transitionName="@string/viewTrans"
                   tools:text="@string/title"
                   android:gravity="center"/>
+
+
         </RelativeLayout>
 
+        <RelativeLayout android:id="@+id/desc_placeholder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/title_placeholder">
+
         <TextView android:id="@+id/desc"
-                  android:layout_width="wrap_content"
+                  android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:layout_below="@+id/title_placeholder"
                   android:ellipsize="end"
                   android:singleLine="true"
                   android:text="@{newsModel.desc}"
-                  android:textSize="@dimen/text_size"
+                  android:textSize="@dimen/desc_text"
                   android:gravity="center"
                   tools:text="@string/desc"
-                  android:textColor="@color/colorAccent"
+                  android:textColor="@color/dark_gray"
                   android:layout_marginBottom="@dimen/activity_vertical_margin"
                   android:layout_marginTop="@dimen/activity_vertical_margin"
                   android:layout_marginRight="@dimen/activity_vertical_margin"
                   android:layout_marginLeft="@dimen/activity_vertical_margin"/>
 
-        <Button android:id="@+id/like_button"
-                style="?android:attr/borderlessButtonStyle"
-                android:text="@string/like"
-                android:textSize="@dimen/text_size"
-                android:onClick="@{() -> newsLike.onLike()}"
-                android:background="@color/favorite_matte"
-                android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_below="@+id/desc"
-                android:layout_height="wrap_content"/>
+        </RelativeLayout>
 
-        <TextView android:id="@+id/like_text"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="@{Integer.toString(newsModel.likes())}"
-                  android:textSize="@dimen/text_size"
-                  android:layout_below="@+id/desc"
-                  tools:text="@string/number"
-                  android:layout_marginLeft="@dimen/activity_vertical_margin"
-                  android:layout_toLeftOf="@+id/favorite_button"
-                 android:layout_marginTop="@dimen/activity_vertical_margin"
-                 android:layout_toRightOf="@+id/like_button"/>
 
-        <ImageButton android:id="@+id/share_button"
+        <RelativeLayout android:id="@+id/share_items"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/desc_placeholder">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp">
+
+                <ImageButton
+                        android:id="@+id/btnLike"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@android:color/transparent"
+                        android:onClick="@{() -> newsLike.onLike()}"
+                        android:tint="@color/detail_accent_label"
+                        android:src="@drawable/ic_favorite_border_black_24dp"/>
+
+            </LinearLayout>
+
+
+            <ImageButton android:id="@+id/share_button"
                      style="?android:attr/borderlessButtonStyle"
                      android:layout_width="@dimen/sizes_share"
                      android:layout_height="@dimen/sizes_share"
-                     android:layout_below="@+id/desc"
                      android:layout_alignParentRight="true"
                      android:layout_alignParentEnd="true"
                      android:layout_marginRight="@dimen/activity_vertical_margin"
@@ -111,11 +158,14 @@
                 android:layout_width="@dimen/sizes_share"
                 android:layout_height="@dimen/sizes_share"
                 android:layout_marginRight="@dimen/activity_vertical_margin"
-                android:layout_below="@+id/desc"
                 android:layout_toLeftOf="@id/share_button"
-                android:src="@drawable/ic_favorite_border_black_24dp"
-                android:tint="@color/favorite_matte"/>
+                android:src="@drawable/ic_chat_bubble_outline_black_24dp"
+                android:tint="@color/detail_accent_label"/>
+
         </RelativeLayout>
 
-</androidx.cardview.widget.CardView>
+
+
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>
 </layout>

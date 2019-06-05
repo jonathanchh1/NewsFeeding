@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="padding">4dp</dimen>
-    <dimen name="height">304dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="imageHeight">205dp</dimen>
+    <dimen name="imageHeight">350dp</dimen>
     <dimen name="text_size">16sp</dimen>
     <dimen name="like_size">12dp</dimen>
     <dimen name="sizes_share">48dp</dimen>
+    <dimen name="title">20dp</dimen>
     <dimen name="margins">10dp</dimen>
     <dimen name="app_bar_height">250dp</dimen>
+    <dimen name="desc_text">12sp</dimen>
+
+
 </resources>

@@ -21,4 +21,7 @@
     <string name="toolbarTrans">tActionBar</string>
     <string name="experimental">title_placeHolder</string>
     <string name="unkown">author unknown</string>
+    <string name="likes_count_">123 likes</string>
+
+
 </resources>

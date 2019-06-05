@@ -70,6 +70,7 @@ class NewsFeedActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
         supportActionBar?.setDisplayShowTitleEnabled(true)
+        supportActionBar?.elevation = 7.5f
     }
 
 
@@ -109,7 +110,8 @@ class NewsFeedActivity : AppCompatActivity() {
 
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if(item?.itemId == R.id.action_toggle){
+        val id = item?.itemId
+        if(id == R.id.action_toggle){
             toggle()
             return true
         }
@@ -118,16 +120,16 @@ class NewsFeedActivity : AppCompatActivity() {
 
     private fun toggle(){
         if(isListView){
-            showListView()
-        }else{
             showGridView()
+        }else{
+            showListView()
         }
     }
 
     private fun showListView(){
         staggeredGridLayoutManager.spanCount = 1
         val item = menu.findItem(R.id.action_toggle)
-        item.setIcon(R.drawable.ic_action_list)
+        item.setIcon(R.drawable.ic_action_grid)
         item.title = getString(R.string.list)
         isListView = true
     }
@@ -135,7 +137,7 @@ class NewsFeedActivity : AppCompatActivity() {
     private fun showGridView(){
         staggeredGridLayoutManager.spanCount = 2
         val item = menu.findItem(R.id.action_toggle)
-        item.setIcon(R.drawable.ic_action_grid)
+        item.setIcon(R.drawable.ic_action_list)
         item.title = getString(R.string.grid)
         isListView = false
     }
