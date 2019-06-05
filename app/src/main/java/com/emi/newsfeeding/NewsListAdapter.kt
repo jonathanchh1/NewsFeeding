@@ -24,9 +24,6 @@ class NewsListAdapter @Inject constructor(private var newsList : List<NewsFeed>)
         return newsList.size
     }
 
-    override fun getItemId(position: Int): Long {
-        return super.getItemId(position)
-    }
 
 
     internal fun updateAdapter(newsfeed : List<NewsFeed>){

@@ -9,7 +9,7 @@
     </data>
 
 
-<com.google.android.material.card.MaterialCardView
+<androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,19 +27,26 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical|right"
-                    android:shadowColor="@color/colorgrey"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true">
+          <ImageView android:id="@+id/thumbnail"
+                   android:layout_width="match_parent"
+                   android:layout_height="@dimen/imageHeight"
+                   android:scaleType="centerCrop"
+                   android:contentDescription="@string/thumbnail"
+                   android:transitionName="@string/viewTrans"
+                   bind:srcCompat="@{newsModel.thumbnail}"/>
+
+            <RelativeLayout android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                             android:layout_alignTop="@+id/thumbnail">
+
 
                 <ImageView
+                        android:id="@+id/likeImage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="10dp"
                         android:tint="@color/favorite_matte"
                         android:src="@drawable/ic_favorite_black_24dp"/>
 
@@ -47,6 +54,8 @@
                         android:id="@+id/tsLikesCounter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/likeImage"
+                        android:layout_marginTop="5dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
                         android:inAnimation="@anim/slide_in_likes_counter"
@@ -57,20 +66,11 @@
                             android:layout_height="wrap_content"
                             android:text="@{Integer.toString(newsModel.likes())}"
                             tools:text="@string/likes_count_"
-                            android:textColor="@color/text_like_counter"/>
-
+                            android:background="@color/shadow"
+                            android:textColor="@color/white"/>
                 </TextSwitcher>
-            </LinearLayout>
 
-
-            <ImageView android:id="@+id/thumbnail"
-                   android:layout_width="match_parent"
-                   android:layout_height="@dimen/imageHeight"
-                   android:scaleType="centerCrop"
-                   android:contentDescription="@string/thumbnail"
-                   android:transitionName="@string/viewTrans"
-                   bind:srcCompat="@{newsModel.thumbnail}"/>
-
+            </RelativeLayout>
 
 
         <RelativeLayout android:id="@+id/title_placeholder"
@@ -87,7 +87,7 @@
                   android:layout_margin="@dimen/margins"
                   android:textStyle="bold"
                   android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                  android:textColor="@color/detail_accent_label"
+                  android:textColor="@color/white"
                   android:transitionName="@string/viewTrans"
                   tools:text="@string/title"
                   android:gravity="center"/>
@@ -135,7 +135,7 @@
                         android:layout_height="48dp"
                         android:background="@android:color/transparent"
                         android:onClick="@{() -> newsLike.onLike()}"
-                        android:tint="@color/detail_accent_label"
+                        android:tint="@color/text_like_counter"
                         android:src="@drawable/ic_favorite_border_black_24dp"/>
 
             </LinearLayout>
@@ -160,12 +160,12 @@
                 android:layout_marginRight="@dimen/activity_vertical_margin"
                 android:layout_toLeftOf="@id/share_button"
                 android:src="@drawable/ic_chat_bubble_outline_black_24dp"
-                android:tint="@color/detail_accent_label"/>
+                android:tint="@color/text_like_counter"/>
 
         </RelativeLayout>
 
 
 
     </RelativeLayout>
-</com.google.android.material.card.MaterialCardView>
+</androidx.cardview.widget.CardView>
 </layout>

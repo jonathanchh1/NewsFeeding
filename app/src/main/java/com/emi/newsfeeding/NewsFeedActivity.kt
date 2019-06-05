@@ -19,6 +19,7 @@ import com.emi.newsfeeding.di.injector
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.news_items.*
 import kotlinx.android.synthetic.main.toolbar.*
+import timber.log.Timber
 import javax.inject.Inject
 
 class NewsFeedActivity : AppCompatActivity() {
@@ -55,12 +56,16 @@ class NewsFeedActivity : AppCompatActivity() {
             }
         })
 
-        viewModel.storeLikes.observe(this, Observer {
-            likes ->
+        viewModel.storeLikes.observe(this, Observer{
+           likes ->
             likes?.let {
-                news.likes = it
+                news.likes = likes
+                Timber.e(NewsFeedActivity::class.java.simpleName, "likes :", it)
+
             }
         })
+
+
         setUpbar()
         windowTransition()
     }

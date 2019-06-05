@@ -66,11 +66,13 @@ dependencies {
     // Picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
+
     // Circle imageView
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
     androidTestImplementation 'androidx.test:runner:1.2.0'
+
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     implementation "androidx.room:room-runtime:2.1.0-rc01"

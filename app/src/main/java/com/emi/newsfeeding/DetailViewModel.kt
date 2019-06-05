@@ -19,4 +19,6 @@ class DetailViewModel @Inject constructor(private var news : NewsFeed, private v
         return news.author ?: context.getString(R.string.unkown)
     }
 
+
+
     }
