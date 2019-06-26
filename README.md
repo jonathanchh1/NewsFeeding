@@ -29,8 +29,7 @@ What I have learned from this project:
 
 Fetching JSON data and parsing it.
 Working with libraries like Retrofit and GSON
-Maintaining a good design ny following Material Design Guidelines by Google.
-Working with UI libraries like Material Drawer by Mike Penz.
+Maintaining a good design following Material Design Guidelines by Google.
 Saving Orientation changes with savedInstance.
 Libraries used in this project:
 
