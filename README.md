@@ -1,6 +1,4 @@
 # NewsFeeding
-NewsFeed project implementing all architectural component in kotlin, room, livedata, Coroutines, rxjava, retrofit and Dagger 2 
-
 
 Features:
 
@@ -28,6 +26,7 @@ Libraries used in this project:
 Retrofit2
 OkHTTP3
 GSON,
+LiveData
 Dagger 2
 Picasso,
 Room DB
