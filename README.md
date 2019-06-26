@@ -10,10 +10,10 @@ Option of sharing the news with friends.
 Read the full news by following the link provided in the Article.
 Read news in offline mode without internet.
 
-<img src="https://github.com/jonathanchh1/NewsFeeding/blob/master/Screenshot_1561561253.png" width="100"> <img src="https://github.com/jonathanchh1/NewsFeeding/blob/master/Screenshot_1561559518.png" width="100">  <img src="https://github.com/jonathanchh1/NewsFeeding/blob/master/Screenshot_1561561155.png" width="100">
+<img src="https://github.com/jonathanchh1/NewsFeeding/blob/master/Screenshot_1561561253.png" width="300"> <img src="https://github.com/jonathanchh1/NewsFeeding/blob/master/Screenshot_1561559518.png" width="300">  <img src="https://github.com/jonathanchh1/NewsFeeding/blob/master/Screenshot_1561561155.png" width="300">
 
 
- <img src="https://github.com/jonathanchh1/NewsFeeding/blob/master/Screenshot_1561561257.png" width="100"><img src="https://github.com/jonathanchh1/NewsFeeding/blob/master/Screenshot_1561559505.png" width="100">
+ <img src="https://github.com/jonathanchh1/NewsFeeding/blob/master/Screenshot_1561561257.png" width="300"><img src="https://github.com/jonathanchh1/NewsFeeding/blob/master/Screenshot_1561559505.png" width="300">
 
 
 
