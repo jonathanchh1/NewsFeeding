@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         xmlns:bind="http://schemas.android.com/apk/res-auto">
 
 <data>
         <import type="android.view.View"/>
+         <import type="com.emi.newsfeeding.R"/>
         <variable name="newsModel" type="com.emi.newsfeeding.PresentViewModel"/>
-        <variable name="newsLike" type="com.emi.newsfeeding.NewsViewModel"/>
     </data>
 
 
@@ -13,13 +14,12 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:nestedScrollingEnabled="true"
         bind:cardElevation="2dp"
         android:onClick="@{newsModel::onClick}"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_vertical_margin"
-       android:foreground="?attr/selectableItemBackground">
+        android:foreground="?attr/selectableItemBackground">
 
 
 
@@ -37,6 +37,7 @@
 
             <RelativeLayout android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/shadowlikes"
                              android:layout_alignTop="@+id/thumbnail">
 
 
@@ -47,28 +48,22 @@
                         android:padding="5dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="10dp"
-                        android:tint="@color/favorite_matte"
-                        android:src="@drawable/ic_favorite_black_24dp"/>
+                        android:tint="@color/colorgrey"
+                        android:src="@drawable/ic_favorite_black_24dp">
 
-                <TextSwitcher
-                        android:id="@+id/tsLikesCounter"
+                </ImageView>
+
+                <TextView
+                        android:id="@+id/like_counter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@{Integer.toString(safeUnbox(newsModel.likes()))}"
                         android:layout_toLeftOf="@+id/likeImage"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:inAnimation="@anim/slide_in_likes_counter"
-                        android:outAnimation="@anim/slide_out_like_counter">
+                        android:textSize="15sp"
+                        android:layout_marginTop="6dp"
+                        tools:text="@string/likes_count_"
+                        android:textColor="@color/white"/>
 
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{Integer.toString(newsModel.likes())}"
-                            tools:text="@string/likes_count_"
-                            android:background="@color/shadow"
-                            android:textColor="@color/white"/>
-                </TextSwitcher>
 
             </RelativeLayout>
 
@@ -123,22 +118,20 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/desc_placeholder">
 
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp">
+
 
                 <ImageButton
                         android:id="@+id/btnLike"
+                        style="?android:attr/borderlessButtonStyle"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:background="@android:color/transparent"
-                        android:onClick="@{() -> newsLike.onLike()}"
-                        android:tint="@color/text_like_counter"
-                        android:src="@drawable/ic_favorite_border_black_24dp"/>
+                        android:onClick="@{() -> newsModel.onLiked()}"
+                        android:src="@drawable/ic_thumb_up_black_24dp"
+                        android:tint="@color/text_like_counter"/>
 
-            </LinearLayout>
 
 
             <ImageButton android:id="@+id/share_button"
@@ -147,7 +140,10 @@
                      android:layout_height="@dimen/sizes_share"
                      android:layout_alignParentRight="true"
                      android:layout_alignParentEnd="true"
+                     android:clickable="true"
+                      android:focusable="true"
                      android:layout_marginRight="@dimen/activity_vertical_margin"
+                     android:onClick="@{() -> newsModel.SharedActionProvider()}"
                      android:src="@drawable/ic_share_black_24dp"
                      android:tint="@color/share_matte"/>
 

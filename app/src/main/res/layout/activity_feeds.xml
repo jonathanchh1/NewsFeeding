@@ -9,6 +9,7 @@
         <variable name="newsModels" type="com.emi.newsfeeding.NewsViewModel"/>
     </data>
 
+
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -16,6 +17,13 @@
             android:orientation="vertical">
           <include layout="@layout/toolbar"/>
 
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:refreshing="@{newsModels.isLoading()}"
+                app:onRefreshListener="@{() -> newsModels.onRefresh()}">
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rc_news"
@@ -25,12 +33,16 @@
                 tools:listitem="@layout/news_items">
 
         </androidx.recyclerview.widget.RecyclerView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
         <androidx.core.widget.ContentLoadingProgressBar
                 android:id="@+id/progressBar"
-                android:visibility="@{newsModels.isLoading() ? View.VISIBLE : View.GONE}"
+                android:visibility="@{safeUnbox(newsModels.isLoading()) ? View.GONE : View.VISIBLE}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"/>
+
     </LinearLayout>
+
 </layout>

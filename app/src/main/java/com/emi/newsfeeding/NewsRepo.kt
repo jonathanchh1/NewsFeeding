@@ -24,11 +24,11 @@ newsPathFinder: NewsPathFinder) : Disposable {
     var isLoading = ObservableField<Boolean>()
     var loadingFromDatabase : LiveData<List<NewsFeed>> = newsFeedDao.getDatabaseNews()
 
-    private val loadingFromApi : LiveData<List<NewsFeed>>
+     val loadingFromApi : LiveData<List<NewsFeed>>
     get() = mutableNewsApi
 
      fun LoadingData() : LiveData<List<NewsFeed>>{
-         isLoading.set(false)
+         isLoading.set(true)
          disposable = newsPathFinder.getFoundData()
              .subscribeOn(Schedulers.io())
              .observeOn(AndroidSchedulers.mainThread())
@@ -40,7 +40,7 @@ newsPathFinder: NewsPathFinder) : Disposable {
     private fun onSuccessfulRequest(newsResponse: NewsResponse){
         isLoading.set(false)
         val result = newsResponse?.result
-        mutableNewsApi.value = result
+        mutableNewsApi.postValue(result)
         result?.forEach {
             loadDatabase ->
             newsViewModel.insertNews(loadDatabase)

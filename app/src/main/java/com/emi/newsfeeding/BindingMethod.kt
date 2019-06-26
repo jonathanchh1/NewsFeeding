@@ -17,6 +17,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.palette.graphics.Palette
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import timber.log.Timber
 
 
 object BindingMethod {
@@ -35,8 +36,9 @@ object BindingMethod {
                }
 
                 override fun onError() {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    Timber.d("there's an issue while trying to download the image")
                 }
+
 
             })
 

@@ -5,9 +5,11 @@ import android.os.Build
 import android.os.Bundle
 import android.transition.Transition
 import android.transition.TransitionListenerAdapter
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -29,7 +31,6 @@ class NewsFeedActivity : AppCompatActivity() {
     private lateinit var adapter : NewsListAdapter
     private lateinit var menu : Menu
     private var isListView : Boolean = false
-    private var news = NewsFeed()
 
     private val viewModel by lazy {
         ViewModelProviders.of(this, injector.NewsViewModelFactory()).get(NewsViewModel::class.java)
@@ -47,7 +48,7 @@ class NewsFeedActivity : AppCompatActivity() {
          binding.rcNews.adapter = adapter
          isListView = true
 
-        viewModel.loadingApiNews.observe(this, Observer {
+        viewModel.loadingApiNews.observe(this, Observer<List<NewsFeed>> {
             if(it == null || it.isEmpty()){
                 onLoadingError()
             }else{
@@ -55,16 +56,6 @@ class NewsFeedActivity : AppCompatActivity() {
                 adapter.notifyDataSetChanged()
             }
         })
-
-        viewModel.storeLikes.observe(this, Observer{
-           likes ->
-            likes?.let {
-                news.likes = likes
-                Timber.e(NewsFeedActivity::class.java.simpleName, "likes :", it)
-
-            }
-        })
-
 
         setUpbar()
         windowTransition()
@@ -75,7 +66,6 @@ class NewsFeedActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
         supportActionBar?.setDisplayShowTitleEnabled(true)
-        supportActionBar?.elevation = 7.5f
     }
 
 

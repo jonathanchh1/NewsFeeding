@@ -17,14 +17,14 @@ class NewsListAdapter @Inject constructor(private var newsList : List<NewsFeed>)
     }
 
     override fun onBindViewHolder(holder: NewsFeedBindingView, position: Int) {
-        holder.bind(newsList[position])
+        holder.bind(newsList.get(position))
     }
 
     override fun getItemCount(): Int {
         return newsList.size
     }
 
-
+    override fun getItemViewType(position: Int) = position
 
     internal fun updateAdapter(newsfeed : List<NewsFeed>){
         this.newsList = newsfeed
@@ -34,7 +34,7 @@ class NewsListAdapter @Inject constructor(private var newsList : List<NewsFeed>)
 
         fun bind(news : NewsFeed){
             if(binding.newsModel == null){
-                binding.newsModel = PresentViewModel(news)
+                binding.newsModel = PresentViewModel(itemView.context, news)
             }else{
                 binding.newsModel!!.news = news
             }

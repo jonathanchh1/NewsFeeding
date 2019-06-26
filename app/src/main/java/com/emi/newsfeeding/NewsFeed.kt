@@ -9,6 +9,7 @@ import kotlinx.android.parcel.Parcelize
 import javax.inject.Singleton
 
 @Entity(tableName = "table_news")
+@TypeConverters(Converter::class)
 @Parcelize
 @Singleton data class NewsFeed(@PrimaryKey(autoGenerate = true) var id : Int = 0,
                                  @Expose
@@ -32,7 +33,7 @@ import javax.inject.Singleton
                                  @Expose
                                  @SerializedName("content")
                                  @ColumnInfo(name = "content") var content : String?=null,
-                                 @ColumnInfo(name = "likes") var likes : Int?=null) : Parcelable
+                                 @ColumnInfo(name = "likes") var likes : ObservableInt = ObservableInt(0)) : Parcelable
 
 
 @Entity(tableName = "tables_news")

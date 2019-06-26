@@ -2,7 +2,9 @@ package com.emi.newsfeeding
 
 import android.app.Activity
 import android.app.ActivityOptions
+import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.util.Pair.create
 import android.view.View
 import android.view.Window
@@ -10,20 +12,49 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.databinding.ObservableField
+import androidx.databinding.ObservableInt
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import timber.log.Timber
 import javax.inject.Inject
 
-class PresentViewModel @Inject constructor(var news : NewsFeed) : ViewModel(){
+class PresentViewModel constructor(private var context : Context, var news : NewsFeed) : ViewModel(){
 
+
+    val isLiked = ObservableField<Boolean>(false)
     fun thumbnail() = news.thumbnail
     fun desc() = news.desc
     fun title() = news.title
     fun likes() = news.likes
 
+
+    fun onLiked(){
+        if(news.likes.get() == 0){
+            isLiked.set(false)
+            news.likes.set(news.likes.get() + 1)
+        }else if(news.likes.get() > 0){
+            isLiked.set(true)
+            news.likes.set(1)
+        }
+    }
+
+
+
     fun onClick(view : View){
         val intent = Intent(view.context, DetailActivity::class.java)
         intent.putExtra("news", news)
         transition(view, intent)
+    }
+
+    fun SharedActionProvider(){
+        val intent = Intent(Intent.ACTION_SEND)
+         intent.type = "text/plain"
+         intent.putExtra(Intent.EXTRA_SUBJECT, news.title)
+         intent.putExtra(Intent.EXTRA_TEXT, news.url)
+         context.startActivity(Intent.createChooser(intent, "Shared Options"))
     }
 
 
@@ -47,8 +78,8 @@ class PresentViewModel @Inject constructor(var news : NewsFeed) : ViewModel(){
             pairs  += naviPairs
         }
 
-        val options = ActivityOptions.makeSceneTransitionAnimation(view.context as Activity, thumbnailPair, titlePair, placeholderPair)
-        ActivityOptions.makeSceneTransitionAnimation(view.context as Activity, *pairs.toTypedArray())
-        ContextCompat.startActivity(view.context, intent, options.toBundle())
+        val options = ActivityOptions.makeSceneTransitionAnimation(context as Activity, thumbnailPair, titlePair, placeholderPair)
+        ActivityOptions.makeSceneTransitionAnimation(context as Activity, *pairs.toTypedArray())
+        ContextCompat.startActivity(context, intent, options.toBundle())
     }
 }

@@ -6,10 +6,10 @@
     <string name="like">like</string>
     <string name="number">10</string>
     <string name="author">author</string>
-    <string name="writer">Writer :</string>
+    <string name="writer">Writer </string>
     <string name="name">Melissa Filippi</string>
     <string name="date">06/01/2019</string>
-    <string name="date_label">Published :</string>
+    <string name="date_label">Published </string>
     <string name="grid">show as Grid</string>
     <string name="list">list view</string>
     <string name="errorloading">There\'s no network connection currently.</string>
@@ -22,6 +22,16 @@
     <string name="experimental">title_placeHolder</string>
     <string name="unkown">author unknown</string>
     <string name="likes_count_">123 likes</string>
+    <string name="likes">Like</string>
+    <string name="template">we are going to hold our content over here its going to be filled to only three lines
+    </string>
+    <string name="templates">we are going to hold our content over here its going to be filled to only three lines we
+        are going to hold our content over here its going to be filled to only three lines we are going to hold our
+        content over here its going to be filled to only three lines
+    </string>
+    <string name="unavailable_info">The article isn\'t available here but you can check on the site by clicking on the
+        button below.
+    </string>
 
 
 </resources>
