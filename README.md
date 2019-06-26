@@ -14,6 +14,7 @@ Read news in offline mode without internet.
 
 What I have learned from this project:
 
+
 Fetching JSON data and parsing it.
 Working with libraries like Retrofit and GSON
 Maintaining a good design ny following Material Design Guidelines by Google.
