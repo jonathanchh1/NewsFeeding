@@ -13,8 +13,7 @@ Read news in offline mode without internet.
 
 
 What I have learned from this project:
-
-![alt text  width="40dp" height="40dp"](https://github.com/jonathanchh1/NewsFeeding/blob/master/Screenshot_1561561253.png)
+<img src="https://github.com/jonathanchh1/NewsFeeding/blob/master/Screenshot_1561561253.png" width="48">
 
 Fetching JSON data and parsing it.
 Working with libraries like Retrofit and GSON
