@@ -31,8 +31,6 @@ Fetching JSON data and parsing it.
 Working with libraries like Retrofit and GSON
 Maintaining a good design following Material Design Guidelines by Google.
 Saving Orientation changes with savedInstance.
-Libraries used in this project:
-
 
 It a fully Open Source project so go ahead and fork it.
 Note: Please use your own API KEY. Its very easy to set up. Just go to https://newsapi.org/register.
