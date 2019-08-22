@@ -9,7 +9,12 @@ Read the full news by following the link provided in the Article.
 Read news in offline mode without internet.
 
 
-<img src="https://github.com/jonathanchh1/NollyFilms/blob/master/Screenshot_1566508544.png" width="300"> <img src="https://github.com/jonathanchh1/NollyFilms/blob/master/Screenshot_1566508550.png" width="300"><img src="https://github.com/jonathanchh1/NollyFilms/blob/master/Screenshot_1566509325.png" width="300"><img src="https://github.com/jonathanchh1/NollyFilms/blob/master/Screenshot_1566509355.png" width="300"><img src="https://github.com/jonathanchh1/NollyFilms/blob/master/Screenshot_1566509405.png" width="300"><img 
+<img src="https://github.com/jonathanchh1/NollyFilms/blob/master/Screenshot_1566508544.png" width="300"> 
+
+<img src="https://github.com/jonathanchh1/NollyFilms/blob/master/Screenshot_1566508550.png" width="300">
+
+<img src="https://github.com/jonathanchh1/NollyFilms/blob/master/Screenshot_1566509325.png" width="300">
+<img src="https://github.com/jonathanchh1/NollyFilms/blob/master/Screenshot_1566509355.png" width="300"><img 
 
 Libraries
 
